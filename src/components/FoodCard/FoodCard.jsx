@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 
-
 const FoodCard = ({ item }) => {
     const { name, image, price, recipe, _id } = item;
     const { user } = useAuth();
@@ -25,7 +24,6 @@ const FoodCard = ({ item }) => {
             }
             axiosSecure.post('/carts', cartItem)
                 .then(res => {
-                    console.log(res.data)
                     if (res.data.insertedId) {
                         Swal.fire({
                             position: "top-end",
@@ -34,13 +32,10 @@ const FoodCard = ({ item }) => {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        // refetch cart to update the cart items count
                         refetch();
                     }
-
                 })
-        }
-        else {
+        } else {
             Swal.fire({
                 title: "You are not Logged In",
                 text: "Please login to add to the cart?",
@@ -51,25 +46,24 @@ const FoodCard = ({ item }) => {
                 confirmButtonText: "Yes, login!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    //   send the user to the login page
                     navigate('/login', { state: { from: location } })
                 }
             });
         }
     }
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
-            <figure><img src={image} alt="Shoes" /></figure>
-            <p className="absolute right-0 mr-4 mt-4 px-4 bg-slate-900 text-white">${price}</p>
-            <div className="card-body flex flex-col items-center">
-                <h2 className="card-title">{name}</h2>
-                <p>{recipe}</p>
-                <div className="card-actions justify-end">
-                    <button
-                        onClick={handleAddToCart}
-                        className="btn btn-outline bg-slate-100 border-0 border-b-4 border-orange-400 mt-4"
-                    >Add to Cart</button>
-                </div>
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col transition-transform hover:-translate-y-1 hover:shadow-xl duration-200">
+            <div className="relative">
+                <img src={image} alt={name} className="w-full h-56 object-cover" />
+                <span className="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-lg font-semibold rounded-full shadow">${price}</span>
+            </div>
+            <div className="p-6 flex flex-col flex-1">
+                <h2 className="text-xl font-bold mb-2 text-gray-900">{name}</h2>
+                <p className="text-gray-600 mb-4 flex-1">{recipe}</p>
+                <button
+                    onClick={handleAddToCart}
+                    className="mt-auto btn bg-blue-600 text-white hover:bg-blue-700 border-none w-full rounded-lg shadow-sm"
+                >Add to Cart</button>
             </div>
         </div>
     );

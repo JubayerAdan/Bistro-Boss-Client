@@ -16,8 +16,8 @@ import {
   Legend,
 } from "recharts";
 
-const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const colors = ["#2563eb", "#10b981", "#f59e42", "#ef4444", "#8b5cf6", "#ec4899"];
+const COLORS = ["#2563eb", "#10b981", "#f59e42", "#ef4444"];
 
 const AdminHome = () => {
   const { user } = useAuth();
@@ -53,7 +53,6 @@ const AdminHome = () => {
 
   const TriangleBar = (props) => {
     const { fill, x, y, width, height } = props;
-
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
   };
 
@@ -70,7 +69,6 @@ const AdminHome = () => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
     return (
       <text
         x={x}
@@ -87,64 +85,40 @@ const AdminHome = () => {
   const pieChartData = chartData.map((data) => {
     return { name: data.category, value: data.revenue };
   });
-  console.log(chartData);
+
   return (
-    <div>
-      <h2 className="text-3xl">
-        <span>Hi, Welcome </span>
-        {user?.displayName ? user.displayName : "Back"}
-      </h2>
-      <div className="stats shadow">
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <FaDollarSign className="text-3xl"></FaDollarSign>
-          </div>
-          <div className="stat-title">Revenue</div>
-          <div className="stat-value">${stats.revenue}</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
+    <div className="p-8 bg-gray-100 min-h-screen">
+      <div className="mb-10">
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          Hi, Welcome {user?.displayName ? user.displayName : "Back"}
+        </h2>
+        <p className="text-gray-600">Here's what's happening with your store today.</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
+          <div className="text-3xl font-bold text-blue-600 mb-2">${stats.revenue}</div>
+          <div className="text-gray-600">Revenue</div>
+          <div className="text-xs text-gray-400 mt-1">Jan 1st - Feb 1st</div>
         </div>
-
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <FaUsers className="text-3xl"></FaUsers>
-          </div>
-          <div className="stat-title">Users</div>
-          <div className="stat-value">{stats.users}</div>
-          <div className="stat-desc">↗︎ 400 (22%)</div>
+        <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
+          <div className="text-3xl font-bold text-blue-600 mb-2">{stats.users}</div>
+          <div className="text-gray-600">Users</div>
+          <div className="text-xs text-gray-400 mt-1">↗︎ 400 (22%)</div>
         </div>
-
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <FaBook className="text-3xl"></FaBook>
-          </div>
-          <div className="stat-title">Menu Items</div>
-          <div className="stat-value">{stats.menuItems}</div>
-          <div className="stat-desc">↗︎ 400 (22%)</div>
+        <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
+          <div className="text-3xl font-bold text-blue-600 mb-2">{stats.menuItems}</div>
+          <div className="text-gray-600">Menu Items</div>
+          <div className="text-xs text-gray-400 mt-1">↗︎ 400 (22%)</div>
         </div>
-
-        <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block w-8 h-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-              ></path>
-            </svg>
-          </div>
-          <div className="stat-title">Orders</div>
-          <div className="stat-value">{stats.orders}</div>
-          <div className="stat-desc">↘︎ 90 (14%)</div>
+        <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
+          <div className="text-3xl font-bold text-blue-600 mb-2">{stats.orders}</div>
+          <div className="text-gray-600">Orders</div>
+          <div className="text-xs text-gray-400 mt-1">↘︎ 90 (14%)</div>
         </div>
       </div>
-      <div className="flex">
-        <div className="w-1/2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-white rounded-xl shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Order Statistics</h3>
           <BarChart
             width={500}
             height={300}
@@ -156,14 +130,14 @@ const AdminHome = () => {
               bottom: 5,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="category" />
-            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+            <XAxis dataKey="category" stroke="#6B7280" />
+            <YAxis stroke="#6B7280" />
             <Bar
               dataKey="quantity"
-              fill="#8884d8"
+              fill="#2563eb"
               shape={<TriangleBar />}
-              label={{ position: "top" }}
+              label={{ position: "top", fill: "#6B7280" }}
             >
               {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={colors[index % 6]} />
@@ -171,7 +145,8 @@ const AdminHome = () => {
             </Bar>
           </BarChart>
         </div>
-        <div className="w-1/2">
+        <div className="bg-white rounded-xl shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Revenue Distribution</h3>
           <PieChart width={400} height={400}>
             <Pie
               data={pieChartData}
@@ -180,7 +155,7 @@ const AdminHome = () => {
               labelLine={false}
               label={renderCustomizedLabel}
               outerRadius={80}
-              fill="#8884d8"
+              fill="#2563eb"
               dataKey="value"
             >
               {pieChartData.map((entry, index) => (
@@ -190,7 +165,7 @@ const AdminHome = () => {
                 />
               ))}
             </Pie>
-            <Legend></Legend>
+            <Legend />
           </PieChart>
         </div>
       </div>

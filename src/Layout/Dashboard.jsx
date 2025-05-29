@@ -1,15 +1,3 @@
-import {
-  FaAd,
-  FaBook,
-  FaCalendar,
-  FaEnvelope,
-  FaHome,
-  FaList,
-  FaSearch,
-  FaShoppingCart,
-  FaUsers,
-  FaUtensils,
-} from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import useAdmin from "../hooks/useAdmin";
@@ -21,39 +9,37 @@ const Dashboard = () => {
   const [isAdmin] = useAdmin();
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-100">
       {/* dashboard side bar */}
-      <div className="w-64 min-h-screen bg-orange-400">
-        <ul id="sidebar" className="menu p-4">
+      <div className="w-64 min-h-screen bg-white border-r border-gray-200">
+        <div className="p-4 border-b border-gray-200">
+          <h2 className="text-xl font-semibold text-gray-900">Dashboard</h2>
+        </div>
+        <ul id="sidebar" className="menu p-4 text-gray-800">
           {isAdmin ? (
             <>
               <li>
-                <NavLink to="/dashboard/adminHome">
-                  <FaHome></FaHome>
+                <NavLink to="/dashboard/adminHome" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   Admin Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/addItem">
-                  <FaUtensils></FaUtensils>
+                <NavLink to="/dashboard/addItem" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   Add an Item
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/manageitems">
-                  <FaList></FaList>
+                <NavLink to="/dashboard/manageitems" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   Manage Items
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/bookings">
-                  <FaBook></FaBook>
+                <NavLink to="/dashboard/bookings" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   Manage Bookings
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/users">
-                  <FaUsers></FaUsers>
+                <NavLink to="/dashboard/users" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   All Users
                 </NavLink>
               </li>
@@ -61,54 +47,46 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/userHome">
-                  <FaHome></FaHome>
+                <NavLink to="/dashboard/userHome" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   User Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/reservation">
-                  <FaCalendar></FaCalendar>
+                <NavLink to="/dashboard/reservation" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   Reservation
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/cart">
-                  <FaShoppingCart></FaShoppingCart>
+                <NavLink to="/dashboard/cart" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   My Cart ({cart.length})
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/review">
-                  <FaAd></FaAd>
+                <NavLink to="/dashboard/review" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   Add a Review
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/bookings">
-                  <FaList></FaList>
+                <NavLink to="/dashboard/bookings" className="text-sky-600 hover:text-sky-800 rounded-lg">
                   My Bookings
                 </NavLink>
               </li>
             </>
           )}
           {/* shared nav links */}
-          <div className="divider"></div>
+          <div className="divider my-4"></div>
           <li>
-            <NavLink to="/">
-              <FaHome></FaHome>
+            <NavLink to="/" className="text-sky-600 hover:text-sky-800 rounded-lg">
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/order/salad">
-              <FaSearch></FaSearch>
+            <NavLink to="/order/salad" className="text-sky-600 hover:text-sky-800 rounded-lg">
               Menu
             </NavLink>
           </li>
           <li>
-            <NavLink to="/order/contact">
-              <FaEnvelope></FaEnvelope>
+            <NavLink to="/order/contact" className="text-sky-600 hover:text-sky-800 rounded-lg">
               Contact
             </NavLink>
           </li>

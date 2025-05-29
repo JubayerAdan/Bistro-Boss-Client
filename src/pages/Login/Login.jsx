@@ -57,43 +57,37 @@ const Login = () => {
             <Helmet>
                 <title>Bistro Boss | Login</title>
             </Helmet>
-            <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content flex-col md:flex-row-reverse">
-                    <div className="text-center md:w-1/2 lg:text-left">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
-                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    </div>
-                    <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
-                        <form onSubmit={handleLogin} className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input type="email" name="email" placeholder="email" className="input input-bordered" />
+            <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4">
+                <div className="w-full max-w-md">
+                    <div className="bg-white rounded-2xl shadow-lg p-8">
+                        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">Login to Your Account</h1>
+                        <p className="text-gray-500 text-center mb-6">Welcome back! Please enter your details.</p>
+                        <form onSubmit={handleLogin} className="space-y-4">
+                            <div>
+                                <label className="block text-gray-700 mb-1">Email</label>
+                                <input type="email" name="email" placeholder="Email" className="input input-bordered w-full bg-gray-50 border border-gray-300 text-gray-900 focus:border-sky-600 focus:shadow" />
                             </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="password" name="password" placeholder="password" className="input input-bordered" />
-                                <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
+                            <div>
+                                <label className="block text-gray-700 mb-1">Password</label>
+                                <input type="password" name="password" placeholder="Password" className="input input-bordered w-full bg-gray-50 border border-gray-300 text-gray-900 focus:border-sky-600 focus:shadow" />
+                                <div className="flex justify-end mt-1">
+                                    <a href="#" className="text-xs text-sky-600 hover:text-sky-800">Forgot password?</a>
+                                </div>
                             </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <LoadCanvasTemplate />
-                                </label>
-                                <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type the captcha above" className="input input-bordered" />
-
+                            <div>
+                                <label className="block text-gray-700 mb-1">Captcha</label>
+                                <LoadCanvasTemplate />
+                                <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Type the captcha above" className="input input-bordered w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 focus:border-sky-600 focus:shadow" />
                             </div>
-                            <div className="form-control mt-6">
-                                {/* TODO: apply disabled for re captcha */}
-                                <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
-                            </div>
+                            <button type="submit" disabled={disabled} className="btn w-full bg-sky-600 text-white hover:bg-sky-700 mt-2">Login</button>
                         </form>
-                        <p className='px-6'><small>New Here? <Link to="/signup">Create an account</Link> </small></p>
-                        <SocialLogin></SocialLogin>
+                        <p className="mt-6 text-center text-sm text-gray-600">
+                            New Here?{' '}
+                            <Link to="/signup" className="text-sky-600 hover:text-sky-800 font-semibold">Create an account</Link>
+                        </p>
+                        <div className="mt-6">
+                            <SocialLogin />
+                        </div>
                     </div>
                 </div>
             </div>
